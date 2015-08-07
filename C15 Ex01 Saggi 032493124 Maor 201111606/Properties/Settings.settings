@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="LastKnownAccessToken" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Text Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

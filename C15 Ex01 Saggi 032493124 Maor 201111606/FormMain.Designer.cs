@@ -2,17 +2,19 @@
 {
 	partial class FormMain
 	{
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
-
+        
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
 		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
 		protected override void Dispose(bool disposing)
 		{
+            
 			if (disposing && (components != null))
 			{
 				components.Dispose();
@@ -40,6 +42,9 @@
 			this.listBoxEvents = new System.Windows.Forms.ListBox();
 			this.buttonFetchEvents = new System.Windows.Forms.Button();
 			this.buttonFetchCheckIns = new System.Windows.Forms.Button();
+			this.buttonFilterSettings = new System.Windows.Forms.Button();
+			this.checkBoxShowFiltered = new System.Windows.Forms.CheckBox();
+			this.buttonCannedPost = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.pictureSmallProfile)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxEvent)).BeginInit();
 			this.SuspendLayout();
@@ -58,7 +63,7 @@
 			// 
 			this.buttonSetStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSetStatus.Enabled = false;
-			this.buttonSetStatus.Location = new System.Drawing.Point(621, 11);
+			this.buttonSetStatus.Location = new System.Drawing.Point(482, 12);
 			this.buttonSetStatus.Name = "buttonSetStatus";
 			this.buttonSetStatus.Size = new System.Drawing.Size(75, 23);
 			this.buttonSetStatus.TabIndex = 49;
@@ -73,7 +78,7 @@
 			this.textBoxStatus.Enabled = false;
 			this.textBoxStatus.Location = new System.Drawing.Point(163, 14);
 			this.textBoxStatus.Name = "textBoxStatus";
-			this.textBoxStatus.Size = new System.Drawing.Size(452, 20);
+			this.textBoxStatus.Size = new System.Drawing.Size(313, 20);
 			this.textBoxStatus.TabIndex = 48;
 			// 
 			// label3
@@ -105,7 +110,7 @@
 			this.listBoxNewsFeed.ItemHeight = 19;
 			this.listBoxNewsFeed.Location = new System.Drawing.Point(219, 70);
 			this.listBoxNewsFeed.Name = "listBoxNewsFeed";
-			this.listBoxNewsFeed.Size = new System.Drawing.Size(478, 137);
+			this.listBoxNewsFeed.Size = new System.Drawing.Size(478, 118);
 			this.listBoxNewsFeed.TabIndex = 51;
 			// 
 			// buttonFetchNewsFeed
@@ -113,7 +118,7 @@
 			this.buttonFetchNewsFeed.Enabled = false;
 			this.buttonFetchNewsFeed.Location = new System.Drawing.Point(219, 41);
 			this.buttonFetchNewsFeed.Name = "buttonFetchNewsFeed";
-			this.buttonFetchNewsFeed.Size = new System.Drawing.Size(477, 23);
+			this.buttonFetchNewsFeed.Size = new System.Drawing.Size(291, 23);
 			this.buttonFetchNewsFeed.TabIndex = 52;
 			this.buttonFetchNewsFeed.Text = "Fetch News Feed";
 			this.buttonFetchNewsFeed.UseVisualStyleBackColor = true;
@@ -174,11 +179,52 @@
 			this.buttonFetchCheckIns.UseVisualStyleBackColor = true;
 			this.buttonFetchCheckIns.Click += new System.EventHandler(this.buttonFetchCheckIns_Click);
 			// 
+			// buttonFilterSettings
+			// 
+			this.buttonFilterSettings.Enabled = false;
+			this.buttonFilterSettings.Location = new System.Drawing.Point(607, 41);
+			this.buttonFilterSettings.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonFilterSettings.Name = "buttonFilterSettings";
+			this.buttonFilterSettings.Size = new System.Drawing.Size(88, 24);
+			this.buttonFilterSettings.TabIndex = 58;
+			this.buttonFilterSettings.Text = "Filter Settings...";
+			this.buttonFilterSettings.UseVisualStyleBackColor = true;
+			this.buttonFilterSettings.Click += new System.EventHandler(this.buttonFilterSettings_Click);
+			// 
+			// checkBoxShowFiltered
+			// 
+			this.checkBoxShowFiltered.AutoSize = true;
+			this.checkBoxShowFiltered.Checked = true;
+			this.checkBoxShowFiltered.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.checkBoxShowFiltered.Enabled = false;
+			this.checkBoxShowFiltered.Location = new System.Drawing.Point(515, 45);
+			this.checkBoxShowFiltered.Margin = new System.Windows.Forms.Padding(2);
+			this.checkBoxShowFiltered.Name = "checkBoxShowFiltered";
+			this.checkBoxShowFiltered.Size = new System.Drawing.Size(90, 17);
+			this.checkBoxShowFiltered.TabIndex = 59;
+			this.checkBoxShowFiltered.Text = "Show Filtered";
+			this.checkBoxShowFiltered.UseVisualStyleBackColor = true;
+			this.checkBoxShowFiltered.CheckedChanged += new System.EventHandler(this.checkBoxShowFiltered_CheckedChanged);
+			// 
+			// buttonCannedPost
+			// 
+			this.buttonCannedPost.Enabled = false;
+			this.buttonCannedPost.Location = new System.Drawing.Point(563, 12);
+			this.buttonCannedPost.Name = "buttonCannedPost";
+			this.buttonCannedPost.Size = new System.Drawing.Size(132, 23);
+			this.buttonCannedPost.TabIndex = 60;
+			this.buttonCannedPost.Text = "Canned Post...";
+			this.buttonCannedPost.UseVisualStyleBackColor = true;
+			this.buttonCannedPost.Click += new System.EventHandler(this.buttonCannedPost_Click);
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(708, 420);
+			this.Controls.Add(this.buttonCannedPost);
+			this.Controls.Add(this.checkBoxShowFiltered);
+			this.Controls.Add(this.buttonFilterSettings);
 			this.Controls.Add(this.buttonFetchCheckIns);
 			this.Controls.Add(this.buttonFetchEvents);
 			this.Controls.Add(this.pictureBoxEvent);
@@ -214,6 +260,9 @@
 		private System.Windows.Forms.ListBox listBoxEvents;
 		private System.Windows.Forms.Button buttonFetchEvents;
 		private System.Windows.Forms.Button buttonFetchCheckIns;
+        private System.Windows.Forms.Button buttonFilterSettings;
+        private System.Windows.Forms.CheckBox checkBoxShowFiltered;
+		private System.Windows.Forms.Button buttonCannedPost;
 	}
 }
 

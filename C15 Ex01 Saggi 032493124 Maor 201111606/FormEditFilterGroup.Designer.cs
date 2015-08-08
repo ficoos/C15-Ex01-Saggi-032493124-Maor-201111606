@@ -47,7 +47,7 @@
 			this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonClose.Location = new System.Drawing.Point(11, 334);
-			this.buttonClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.buttonClose.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(359, 27);
 			this.buttonClose.TabIndex = 7;
@@ -60,7 +60,7 @@
 			this.buttonRemoveSelectedGroups.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonRemoveSelectedGroups.Location = new System.Drawing.Point(11, 305);
-			this.buttonRemoveSelectedGroups.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.buttonRemoveSelectedGroups.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonRemoveSelectedGroups.Name = "buttonRemoveSelectedGroups";
 			this.buttonRemoveSelectedGroups.Size = new System.Drawing.Size(359, 25);
 			this.buttonRemoveSelectedGroups.TabIndex = 6;
@@ -72,7 +72,7 @@
 			// 
 			this.buttonAddFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonAddFilter.Location = new System.Drawing.Point(276, 63);
-			this.buttonAddFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.buttonAddFilter.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonAddFilter.Name = "buttonAddFilter";
 			this.buttonAddFilter.Size = new System.Drawing.Size(95, 23);
 			this.buttonAddFilter.TabIndex = 4;
@@ -87,7 +87,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkedListBoxFilterFilters.FormattingEnabled = true;
 			this.checkedListBoxFilterFilters.Location = new System.Drawing.Point(11, 90);
-			this.checkedListBoxFilterFilters.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.checkedListBoxFilterFilters.Margin = new System.Windows.Forms.Padding(2);
 			this.checkedListBoxFilterFilters.Name = "checkedListBoxFilterFilters";
 			this.checkedListBoxFilterFilters.Size = new System.Drawing.Size(360, 199);
 			this.checkedListBoxFilterFilters.TabIndex = 5;
@@ -97,9 +97,10 @@
 			// 
 			this.comboBoxPriority.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxPriority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxPriority.FormattingEnabled = true;
 			this.comboBoxPriority.Location = new System.Drawing.Point(12, 25);
-			this.comboBoxPriority.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.comboBoxPriority.Margin = new System.Windows.Forms.Padding(2);
 			this.comboBoxPriority.Name = "comboBoxPriority";
 			this.comboBoxPriority.Size = new System.Drawing.Size(359, 21);
 			this.comboBoxPriority.TabIndex = 1;
@@ -110,7 +111,7 @@
 			this.textBoxAddFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxAddFilter.Location = new System.Drawing.Point(11, 63);
-			this.textBoxAddFilter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.textBoxAddFilter.Margin = new System.Windows.Forms.Padding(2);
 			this.textBoxAddFilter.Name = "textBoxAddFilter";
 			this.textBoxAddFilter.Size = new System.Drawing.Size(261, 20);
 			this.textBoxAddFilter.TabIndex = 3;
@@ -151,7 +152,7 @@
 			this.Controls.Add(this.buttonAddFilter);
 			this.Controls.Add(this.checkedListBoxFilterFilters);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.MinimumSize = new System.Drawing.Size(400, 400);
 			this.Name = "FormEditFilterGroup";
 			this.Text = "Edit Filter Group";

@@ -116,7 +116,8 @@
 			this.Controls.Add(this.splitContainerMain);
 			this.Controls.Add(this.buttonPost);
 			this.Controls.Add(this.buttonCancel);
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+			this.Margin = new System.Windows.Forms.Padding(2);
 			this.Name = "FormPostCannedPost";
 			this.Text = "Post Canned Post";
 			this.splitContainerMain.Panel1.ResumeLayout(false);

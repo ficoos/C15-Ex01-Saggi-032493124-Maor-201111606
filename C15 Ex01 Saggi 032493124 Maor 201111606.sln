@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9FB5170D-F3D6-4039-AB1F-684D406B4657}"
 	ProjectSection(SolutionItems) = preProject
 		FeatureSpecification.docx = FeatureSpecification.docx
+		Submission.txt = Submission.txt
 	EndProjectSection
 EndProject
 Global

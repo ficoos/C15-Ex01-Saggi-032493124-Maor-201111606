@@ -24,7 +24,7 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 		}
 		
 		/// <summary>
-		/// Used for deserialization since the deserializer already created the template object for us
+		/// Used for deserialization since the deserializer already created the <see cref="Template"/> object for us
 		/// Assumes a new empty <see cref="Template"/> object
 		/// </summary>
 		private static void parseWithExistingTemplate(Template i_Template, string i_Input)
@@ -38,12 +38,16 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 				}
 
 				DynamicTextNode dynamicTextNode = new DynamicTextNode(match.Groups["name"].Value);
-				i_Template.r_TextNodes.Add(dynamicTextNode);
-                if (!i_Template.r_DynamicTextNodes.ContainsKey(dynamicTextNode.Name))
-                {
-                    i_Template.r_DynamicTextNodes.Add(dynamicTextNode.Name, dynamicTextNode);
-                }
+				if (!i_Template.r_DynamicTextNodes.ContainsKey(dynamicTextNode.Name))
+				{
+					i_Template.r_DynamicTextNodes.Add(dynamicTextNode.Name, dynamicTextNode);
+				}
+				else
+				{
+					dynamicTextNode = i_Template.r_DynamicTextNodes[dynamicTextNode.Name];
+				}
 
+				i_Template.r_TextNodes.Add(dynamicTextNode);
 				currentInputIndex = match.Index + match.Length;
 			}
 

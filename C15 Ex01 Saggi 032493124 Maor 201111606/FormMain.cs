@@ -64,11 +64,19 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 
 		private void logIn()
 		{
-			string lastKnownAccessToken = loadLastKnownAccessToken();
 			LoginResult result = null;
+			string lastKnownAccessToken = loadLastKnownAccessToken();
+
 			if (!string.IsNullOrEmpty(lastKnownAccessToken))
 			{
-				result = FacebookService.Connect(lastKnownAccessToken);
+				DialogResult quickLogInResult = MessageBox.Show(
+					@"Would you like to quick log in using the same user?",
+					@"Would you like to quick log in?",
+					MessageBoxButtons.YesNo);
+				if (quickLogInResult == DialogResult.Yes)
+				{
+					result = FacebookService.Connect(lastKnownAccessToken);
+				}
 			}
 
 			if (result == null || string.IsNullOrEmpty(result.AccessToken))

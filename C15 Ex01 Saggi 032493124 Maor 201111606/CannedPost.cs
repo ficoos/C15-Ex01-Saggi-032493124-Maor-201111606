@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 
-
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
 	public class CannedPost
 	{
-
 		public string Name { get; set; }
 
 		private readonly List<string> r_Categories = new List<string>();
@@ -20,11 +18,11 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			}
 		}
 
-		public PostInfo GeneratePost()
+		public PostInfo GeneratePost(IEnumerable<KeyValuePair<string, string>> i_StatusTemplateReplacementPairs)
 		{
 			return new PostInfo()
 						{
-							StatusText = this.StatusTextTemplate == null ? string.Empty : this.StatusTextTemplate.ToString()
+							StatusText = this.StatusTextTemplate == null ? string.Empty : this.StatusTextTemplate.Compile(i_StatusTemplateReplacementPairs)
 						};
 		}
 

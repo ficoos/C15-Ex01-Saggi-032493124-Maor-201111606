@@ -1,84 +1,88 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
-    public partial class FormPostCannedPost : Form
+	using System.Collections.Generic;
+
+	public partial class FormPostCannedPost : Form
     {
-        private Point m_StartFormPosition;
+		private readonly Dictionary<string, string> r_DynamicParts = new Dictionary<string, string>();
 
         public CannedPost CannedPost { get; set; }
 
-        Dictionary<string, TextBox> m_DynamicTextBoxes;
+		public PostInfo CompiledPost { get; private set; }
 
-        private Template CurrTemplate;
-
-        public User m_LoggedInUser;
+		private Template m_Template;
 
 	    public FormPostCannedPost()
 	    {
 			InitializeComponent();
 	    }
 
-	    protected override void OnShown(EventArgs e)
+	    protected override void OnShown(EventArgs i_Args)
 	    {
-		    base.OnShown(e);
-			StartForm();
+		    base.OnShown(i_Args);
+			this.initializeForm();
 	    }
 
-	    public void StartForm()
-        {
-            CurrTemplate = Template.DeepCloneWithDummyValuesForDynmicText(this.CannedPost.StatusTextTemplate);
-            m_StartFormPosition = new Point(10, 10);
-            var AllKeys = CurrTemplate.Keys;
-            foreach (string Key in AllKeys)
+	    private void initializeForm()
+	    {
+			this.r_DynamicParts.Clear();
+		    this.m_Template = CannedPost.StatusTextTemplate;
+            foreach (string key in m_Template.Keys)
             {
-                Label newLable = new Label();
-                newLable.Visible = true;
-                newLable.Text = Key + ":";
-	            newLable.AutoSize = true;
-                
-                TextBox newTextbox = new TextBox();
-                newTextbox.Left = newLable.Width + 20;
-                newTextbox.Name = "TextBoxDynamic" + Key;
-	            newTextbox.Anchor = AnchorStyles.Right | AnchorStyles.Left;
-				newTextbox.Width = (int)this.tableLayoutDyamicNodes.ColumnStyles[1].Width;
-               
-				tableLayoutDyamicNodes.ColumnStyles[0].SizeType = SizeType.AutoSize;
+				this.r_DynamicParts[key] = string.Format("{{{{{0}}}}}", key);
+	            Label newLable = new Label
+				{
+					Visible = true,
+					Text = key + @":",
+					AutoSize = true
+				};
+
+	            TextBox newTextbox = new TextBox
+				{
+					Left = newLable.Width + 20,
+					Name = "TextBoxDynamic" + key,
+					Anchor = AnchorStyles.Right | AnchorStyles.Left,
+					Width = (int)tableLayoutDyamicNodes.ColumnStyles[1].Width
+				};
+
+	            tableLayoutDyamicNodes.ColumnStyles[0].SizeType = SizeType.AutoSize;
 				tableLayoutDyamicNodes.Controls.Add(newLable);
 				tableLayoutDyamicNodes.Controls.Add(newTextbox);
-                newTextbox.TextChanged += new System.EventHandler(this.textBoxDynamic_TextChanged);
+                newTextbox.TextChanged += textBoxDynamic_TextChanged;
             }
-            textBoxTemplate.Text = CurrTemplate.ToString();
+
+			textBoxTemplate.Text = m_Template.Compile(this.r_DynamicParts);
         }
 
-        private void textBoxDynamic_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textbox = sender as TextBox;
+	    private void textBoxDynamic_TextChanged(object i_Sender, EventArgs i_Args)
+	    {
+		    TextBox textbox = (TextBox)i_Sender;
+		    int index = textbox.Name.IndexOf("TextBoxDynamic", StringComparison.Ordinal);
+		    string name = (index < 0) ? textbox.Name : textbox.Name.Remove(index, "TextBoxDynamic".Length);
+			if (string.IsNullOrEmpty(textbox.Text))
+			{
+				this.r_DynamicParts[name] = string.Format("{{{{{0}}}}}", name);
+			}
+			else
+			{
+				this.r_DynamicParts[name] = textbox.Text;
+			}
 
+		    textBoxTemplate.Text = m_Template.Compile(this.r_DynamicParts);
+	    }
 
-                int index = textbox.Name.IndexOf("TextBoxDynamic");
-                string Name = (index < 0)     ? textbox.Name     : textbox.Name.Remove(index, "TextBoxDynamic".Length);
-                CurrTemplate.GetDynamicTextNodeValueByKey(Name).Text = textbox.Text;
-                textBoxTemplate.Text = CurrTemplate.ToString();
-        }
-
-        private void buttonPost_Click(object sender, EventArgs e)
-        {
-            string statusText = textBoxTemplate.Text.Trim();
-            if (!string.IsNullOrEmpty(statusText))
-            {
-                Status status = m_LoggedInUser.PostStatus(textBoxTemplate.Text);
-                MessageBox.Show(@"Status Posted! ID: " + status.Id);
-            }
-            
+	    private void buttonPost_Click(object i_Sender, EventArgs i_Args)
+	    {
+		    CompiledPost = CannedPost.GeneratePost(r_DynamicParts);
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void buttonCancel_Click(object i_Sender, EventArgs i_Args)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();

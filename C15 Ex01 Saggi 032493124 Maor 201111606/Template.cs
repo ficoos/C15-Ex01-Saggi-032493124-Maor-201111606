@@ -1,16 +1,15 @@
+using System;
 using System.Collections.Generic;
-
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
-	using System.Collections;
-	using System.Text;
-	using System.Text.RegularExpressions;
 
-	public class Template : IEnumerable<KeyValuePair<string, DynamicTextNode>>, IXmlSerializable
+	public class Template : IXmlSerializable
 	{
 		private static readonly Regex sr_DynamicSectionRegex = new Regex(@"{{(?<name>[\w\s_]+)}}", RegexOptions.Multiline);
 
@@ -24,7 +23,7 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			parseWithExistingTemplate(template, i_Input);
 			return template;
 		}
-
+		
 		/// <summary>
 		/// Used for deserialization since the deserializer already created the template object for us
 		/// Assumes a new empty <see cref="Template"/> object
@@ -41,10 +40,11 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 
 				DynamicTextNode dynamicTextNode = new DynamicTextNode(match.Groups["name"].Value);
 				i_Template.r_TextNodes.Add(dynamicTextNode);
-                if (i_Template.r_DynamicTextNodes.ContainsKey(dynamicTextNode.Name) != true) //maor: i changed it casue i got exception already in dictunary
+                if (!i_Template.r_DynamicTextNodes.ContainsKey(dynamicTextNode.Name))
                 {
                     i_Template.r_DynamicTextNodes.Add(dynamicTextNode.Name, dynamicTextNode);
                 }
+
 				currentInputIndex = match.Index + match.Length;
 			}
 
@@ -54,16 +54,6 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			}
 		}
 
-        public DynamicTextNode GetDynamicTextNodeValueByKey(string i_Key)   //TO SAGGIE: is it not safe?
-        {
-            DynamicTextNode Result = null;
-            if(r_DynamicTextNodes.ContainsKey(i_Key))
-            {
-                Result = r_DynamicTextNodes[i_Key];
-            }
-            return Result;
-        }
-
 		public IEnumerable<string> Keys
 		{
 			get
@@ -71,56 +61,10 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 				return r_DynamicTextNodes.Keys;
 			}
 		}
-
-
 		
-		public string this[string i_Key]
-		{
-			get
-			{
-				return r_DynamicTextNodes[i_Key].Text;
-			}
-
-			set
-			{
-				if (!r_DynamicTextNodes.ContainsKey(i_Key))
-				{
-					throw new KeyNotFoundException(i_Key);
-				}
-
-				r_DynamicTextNodes[i_Key].Text = value;
-			}
-		}
-
-		public IEnumerator<KeyValuePair<string, DynamicTextNode>> GetEnumerator()
-		{
-			return r_DynamicTextNodes.GetEnumerator();
-		}
-
 		public override string ToString()
 		{
-			StringBuilder builder = new StringBuilder();
-			foreach (ITextNode textNode in r_TextNodes)
-			{
-				builder.Append(textNode.Text);
-			}
 
-			return builder.ToString();
-		}
-
-		IEnumerator IEnumerable.GetEnumerator()
-		{
-			return this.GetEnumerator();
-		}
-
-		private Template()
-		{
-			r_DynamicTextNodes = new Dictionary<string, DynamicTextNode>();
-			r_TextNodes = new List<ITextNode>();
-		}
-		
-		public string Compile()
-		{
 			StringBuilder builder = new StringBuilder();
 			foreach (ITextNode textNode in r_TextNodes)
 			{
@@ -137,6 +81,28 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 
 			return builder.ToString();
 		}
+		
+		private Template()
+		{
+			r_DynamicTextNodes = new Dictionary<string, DynamicTextNode>();
+			r_TextNodes = new List<ITextNode>();
+		}
+		
+		public string Compile(IEnumerable<KeyValuePair<string, string>> i_ReplacementPairs)
+		{
+			foreach (KeyValuePair<string, string> pair in i_ReplacementPairs)
+			{
+				r_DynamicTextNodes[pair.Key].Text = pair.Value;
+			}
+
+			StringBuilder builder = new StringBuilder();
+			foreach (ITextNode textNode in r_TextNodes)
+			{
+				builder.Append(textNode.Text);
+			}
+
+			return builder.ToString();
+		}
 
 		public XmlSchema GetSchema()
 		{
@@ -146,44 +112,19 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 		public void ReadXml(XmlReader i_Reader)
 		{
 			i_Reader.ReadStartElement();
-			parseWithExistingTemplate(this, i_Reader.ReadElementString("StatusTextTemplate"));
+			/* XML specification forces newline to be '\n'.
+			 * This means that when reading the template the newlines might not be the same as the current environment.
+			 * We need to normalize the newlines in order for Windows' and Mac's text boxes to work.
+			 * See: http://www.w3.org/TR/2008/REC-xml-20081126/#sec-line-ends
+			 */
+			string templateString = i_Reader.ReadElementString("StatusTextTemplate").Replace("\n", Environment.NewLine);
+			parseWithExistingTemplate(this, templateString);
 			i_Reader.ReadEndElement();
 		}
 
 		public void WriteXml(XmlWriter i_Writer)
 		{
-			i_Writer.WriteElementString("StatusTextTemplate", Compile());
+			i_Writer.WriteElementString("StatusTextTemplate", ToString());
 		}
-
-        public static Template DeepCloneWithDummyValuesForDynmicText(Template i_Template)
-        {
-            Template ClonedTemplate = new Template();
-            
-            foreach (ITextNode Node in i_Template.r_TextNodes)
-            {
-                DynamicTextNode CastDynamic = (Node as DynamicTextNode);
-                if (CastDynamic != null)
-                {
-                    if (ClonedTemplate.r_DynamicTextNodes.ContainsKey(CastDynamic.Name) == false)
-                    {
-                        DynamicTextNode newDynamic = new DynamicTextNode(CastDynamic.Name);
-                        newDynamic.Text = "{{" + CastDynamic.Name + "}}";
-                        ClonedTemplate.r_TextNodes.Add(newDynamic);
-                        ClonedTemplate.r_DynamicTextNodes.Add(newDynamic.Name, newDynamic);
-                    }
-                    else
-                    {
-                        ClonedTemplate.r_TextNodes.Add(ClonedTemplate.r_DynamicTextNodes[CastDynamic.Name]);
-                    }
-                }
-                else
-                {
-                    ClonedTemplate.r_TextNodes.Add(Node);
-                }
-                
-            }
-
-            return ClonedTemplate;
-        }
 	}
 }

@@ -18,21 +18,10 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			InitializeComponent();
 		}
 
-		protected override void OnShown(EventArgs e)
+		protected override void OnShown(EventArgs i_Args)
 		{
 			this.initializeControls();
-
-			base.OnShown(e);
-		}
-
-		private static string fixNewLines(string i_Input)
-		{
-			if (Environment.NewLine == "\r\n")
-			{
-				i_Input = i_Input.Replace("\n", Environment.NewLine);
-			}
-
-			return i_Input;
+			base.OnShown(i_Args);
 		}
 
 		private void initializeControls()
@@ -42,7 +31,7 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 				this.textBoxName.Enabled = false;
 				this.textBoxName.Text = CannedPost.Name;
 				this.textBoxCategories.Text = string.Join(", ", CannedPost.Categories);
-				this.textBoxTemplate.Text = CannedPost.StatusTextTemplate == null ? string.Empty : fixNewLines(CannedPost.StatusTextTemplate.Compile());
+				this.textBoxTemplate.Text = CannedPost.StatusTextTemplate == null ? string.Empty : CannedPost.StatusTextTemplate.ToString();
 			}
 		}
 
@@ -60,10 +49,14 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			}
 
 			CannedPost.Name = this.textBoxName.Text;
-			CannedPost.Categories.Clear();  //why?
+			CannedPost.Categories.Clear();
 			foreach (string category in textBoxCategories.Text.Split(','))
 			{
-				CannedPost.Categories.Add(category.Trim());
+				string trimmedCategory = category.Trim();
+				if (!string.IsNullOrEmpty(trimmedCategory))
+				{
+					CannedPost.Categories.Add(trimmedCategory.Trim());
+				}
 			}
 
 			CannedPost.StatusTextTemplate = Template.Parse(textBoxTemplate.Text);

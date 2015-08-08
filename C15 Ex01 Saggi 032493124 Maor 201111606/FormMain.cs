@@ -229,8 +229,7 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
             filterSettingsDialog.ShowDialog();
 	        savePostFilters();
         }
-
-
+		
 		private void savePostFilters()
 		{
 			XmlSerializer serializer = new XmlSerializer(typeof(List<PostFilterGroup>));
@@ -261,12 +260,21 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
             fetchNewsFeed();
         }
 
-		private void buttonCannedPost_Click(object sender, EventArgs e)
+		private void buttonCannedPost_Click(object i_Sender, EventArgs i_Args)
 		{
 			FormSelectCannedPost form = new FormSelectCannedPost();
 			form.CannedPostsDirectoryPath = m_UserPaths.CannedPostsDirectory;
-            form.m_LoggedInUser = m_LoggedInUser;
 			form.ShowDialog();
+			if (form.DialogResult == DialogResult.OK)
+			{
+				FormPostCannedPost cannedPost = new FormPostCannedPost();
+				cannedPost.CannedPost = form.SelectedPost;
+				cannedPost.ShowDialog();
+				if (cannedPost.DialogResult == DialogResult.OK)
+				{
+					m_LoggedInUser.PostStatus(cannedPost.CompiledPost.StatusText);
+				}
+			}
 		}
 	}
 }

@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Xml.Serialization;
-
-using FacebookWrapper.ObjectModel;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
     public partial class FormSelectCannedPost : Form
     {      
-        public User m_LoggedInUser;
-
         public CannedPost SelectedPost { get; private set; }
 
         public string CannedPostsDirectoryPath { get; set; }
@@ -27,10 +19,10 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 	        SelectedPost = null;
         }
 
-        protected override void OnShown(EventArgs e)
+        protected override void OnShown(EventArgs i_Args)
         {
             refreshPostList();
-            base.OnShown(e);
+            base.OnShown(i_Args);
         }
 
         private void refreshPostList()
@@ -86,17 +78,12 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
         {
 	        if (treeViewCategories.SelectedNode != null)
 	        {
-		        CannedPost selectedPost = treeViewCategories.SelectedNode.Tag as CannedPost;
-		        if (selectedPost != null)
+		        SelectedPost = treeViewCategories.SelectedNode.Tag as CannedPost;
+				if (SelectedPost != null)
 		        {
-			        FormPostCannedPost cannedPost = new FormPostCannedPost();
-					cannedPost.CannedPost = selectedPost;
-			        cannedPost.m_LoggedInUser = m_LoggedInUser;
-			        cannedPost.ShowDialog();
+					this.DialogResult = DialogResult.OK;
+			        this.Close();
 		        }
-
-		        this.DialogResult = DialogResult.OK;
-		        this.Close();
 	        }
         }
 

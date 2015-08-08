@@ -2,10 +2,11 @@
 <CannedPost xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>Ask Recepy by ingredients</Name>
   <StatusTextTemplate>
-    <StatusTextTemplate>I'm stuck with lots of {{IngredientName}}.
-What can I cook with {{IngredientName}} ?</StatusTextTemplate>
+    <StatusTextTemplate>I'm stuck with lots of {{Ingredient Name}}.
+What can I cook with {{Ingredient Name}} ?</StatusTextTemplate>
   </StatusTextTemplate>
   <Categories>
     <string>Recipes</string>
+	<string>Cooking</string>
   </Categories>
 </CannedPost>

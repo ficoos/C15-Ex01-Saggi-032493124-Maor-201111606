@@ -6,9 +6,10 @@
 Come and have fun at the {{Club name}}!
 For every beer you buy, you get a free {{Booze type}} shot for free!!!!
 Doors open at {{Hour}}.
-Tthe legendary {{DJ Name}} will keep you moving on the dancefloor !!</StatusTextTemplate>
+The legendary {{DJ Name}} will keep you moving on the dance floor!!</StatusTextTemplate>
   </StatusTextTemplate>
   <Categories>
     <string>Events</string>
+	<string>Party</string>
   </Categories>
 </CannedPost>

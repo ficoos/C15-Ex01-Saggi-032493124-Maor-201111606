@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CannedPost xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>Ask For a Recepie</Name>
+  <Name>Ask For a recipe</Name>
   <StatusTextTemplate>
-    <StatusTextTemplate>I'm looking for a good {{Dish Name}} recepie. Any suggestions?</StatusTextTemplate>
+    <StatusTextTemplate>I'm looking for a good {{Dish Name}} recipe. Any suggestions?</StatusTextTemplate>
   </StatusTextTemplate>
   <Categories>
     <string>Recipes</string>
+	<string>Cooking</string>
   </Categories>
 </CannedPost>

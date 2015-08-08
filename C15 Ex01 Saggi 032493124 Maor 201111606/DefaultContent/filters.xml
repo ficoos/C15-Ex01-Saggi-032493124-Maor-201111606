@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPostFilterGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <PostFilterGroup Name="Games Of Throens spoilers" PostPriority="Hidden">
+  <PostFilterGroup Name="Games Of Thrones spoilers" PostPriority="Hidden">
     <PostFilters>
       <RegexPostFilter Regex="Stark" Enabled="True" />
       <RegexPostFilter Regex="Game of thrones" Enabled="True" />
-      <RegexPostFilter Regex="Winter is comming" Enabled="True" />
+      <RegexPostFilter Regex="Winter is coming" Enabled="True" />
       <RegexPostFilter Regex="Arya" Enabled="True" />
     </PostFilters>
   </PostFilterGroup>
@@ -24,7 +24,7 @@
       <RegexPostFilter Regex="הבית היהודי" Enabled="True" />
     </PostFilters>
   </PostFilterGroup>
-  <PostFilterGroup Name="Not intersting stuff" PostPriority="Demoted">
+  <PostFilterGroup Name="Uninteresting stuff" PostPriority="Demoted">
     <PostFilters>
       <RegexPostFilter Regex="Buzzfeed" Enabled="True" />
       <RegexPostFilter Regex="Vegan" Enabled="True" />

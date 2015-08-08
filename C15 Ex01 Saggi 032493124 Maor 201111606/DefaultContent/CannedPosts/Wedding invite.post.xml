@@ -7,9 +7,10 @@ We are pleased to invite you to come and celebrate our special day.
 The ceremony will be at the {{Location}} at {{Time}}.
 
 With Love,
-{{BridesName}} and {{GroomsName}}</StatusTextTemplate>
+{{Bride's Name}} and {{Grooms Name}}</StatusTextTemplate>
   </StatusTextTemplate>
   <Categories>
     <string>Events</string>
+	<string>Wedding</string>
   </Categories>
 </CannedPost>

@@ -3,10 +3,11 @@
   <Name>Girl's night out</Name>
   <StatusTextTemplate>
     <StatusTextTemplate>Hey Girl!
-Get that stupid {{EX name}} out of your head and put on your high hills. {{Sorority member}} is on her way to pick you.
+Get that stupid {{Ex name}} out of your head and put on your high hills. {{Friend name}} is on her way to pick you.
 We're going to have the best night everrrrr!!! </StatusTextTemplate>
   </StatusTextTemplate>
   <Categories>
     <string>Events</string>
+	<string>Heartbreak</string>
   </Categories>
 </CannedPost>

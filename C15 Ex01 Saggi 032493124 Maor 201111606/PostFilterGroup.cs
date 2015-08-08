@@ -102,7 +102,6 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			}
 
 			i_Reader.ReadEndElement();
-		//	i_Reader.ReadEndElement();
 		}
 
 		public void WriteXml(XmlWriter i_Writer)

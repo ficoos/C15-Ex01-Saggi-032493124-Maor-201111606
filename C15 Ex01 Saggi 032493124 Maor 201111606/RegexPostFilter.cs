@@ -1,10 +1,8 @@
 ﻿
-using System;
 using System.Text.RegularExpressions;
 
 using System.Xml;
 using System.Xml.Schema;
-using System.Xml.Serialization;
 
 using FacebookWrapper.ObjectModel;
 
@@ -39,7 +37,6 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 
 		public RegexPostFilter()
 		{
-			
 		}
 
 		public RegexPostFilter(Regex i_Regex)
@@ -65,6 +62,7 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			{
 				Regex = new Regex(rawRegex);
 			}
+
 			string rawEnabled = i_Reader.GetAttribute("Enabled");
 			if (rawEnabled == null)
 			{

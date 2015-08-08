@@ -8,7 +8,6 @@ using System.Xml.Serialization;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
-
 	public class Template : IXmlSerializable
 	{
 		private static readonly Regex sr_DynamicSectionRegex = new Regex(@"{{(?<name>[\w\s_]+)}}", RegexOptions.Multiline);
@@ -61,10 +60,9 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 				return r_DynamicTextNodes.Keys;
 			}
 		}
-		
+
 		public override string ToString()
 		{
-
 			StringBuilder builder = new StringBuilder();
 			foreach (ITextNode textNode in r_TextNodes)
 			{

@@ -23,7 +23,6 @@
 				Directory.CreateDirectory(finalPath);
 				return finalPath;
 			}
-
 		}
 
 		public string PostFiltersPath

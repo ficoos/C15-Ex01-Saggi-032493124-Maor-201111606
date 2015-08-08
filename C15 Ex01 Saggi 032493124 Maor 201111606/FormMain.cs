@@ -265,6 +265,7 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 		{
 			FormSelectCannedPost form = new FormSelectCannedPost();
 			form.CannedPostsDirectoryPath = m_UserPaths.CannedPostsDirectory;
+            form.m_LoggedInUser = m_LoggedInUser;
 			form.ShowDialog();
 		}
 	}

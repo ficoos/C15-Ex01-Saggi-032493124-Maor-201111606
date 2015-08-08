@@ -33,10 +33,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Facebook">
-      <HintPath>.\Facebook.dll</HintPath>
+      <HintPath>..\..\..\Facebook.dll</HintPath>
     </Reference>
     <Reference Include="FbGraphApiWrapper">
-      <HintPath>.\FbGraphApiWrapper.dll</HintPath>
+      <HintPath>..\..\..\FbGraphApiWrapper.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,6 +83,12 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormPostCannedPost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPostCannedPost.Designer.cs">
+      <DependentUpon>FormPostCannedPost.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSelectCannedPost.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPostCannedPost.resx">
+      <DependentUpon>FormPostCannedPost.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelectCannedPost.resx">
       <DependentUpon>FormSelectCannedPost.cs</DependentUpon>

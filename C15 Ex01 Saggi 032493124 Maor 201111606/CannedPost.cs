@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 
+
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
 	public class CannedPost
 	{
+
 		public string Name { get; set; }
 
 		private readonly List<string> r_Categories = new List<string>();

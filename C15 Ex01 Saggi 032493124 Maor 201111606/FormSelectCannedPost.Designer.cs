@@ -28,92 +28,93 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.listBoxCannedPosts = new System.Windows.Forms.ListBox();
-			this.buttonCancel = new System.Windows.Forms.Button();
-			this.buttonCreateNew = new System.Windows.Forms.Button();
-			this.buttonEdit = new System.Windows.Forms.Button();
-			this.buttonSelect = new System.Windows.Forms.Button();
-			this.SuspendLayout();
-			// 
-			// listBoxCannedPosts
-			// 
-			this.listBoxCannedPosts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.listBoxCannedPosts.FormattingEnabled = true;
-			this.listBoxCannedPosts.Location = new System.Drawing.Point(13, 13);
-			this.listBoxCannedPosts.Name = "listBoxCannedPosts";
-			this.listBoxCannedPosts.Size = new System.Drawing.Size(398, 212);
-			this.listBoxCannedPosts.TabIndex = 0;
-			// 
-			// buttonCancel
-			// 
-			this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonCancel.Location = new System.Drawing.Point(335, 232);
-			this.buttonCancel.Name = "buttonCancel";
-			this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-			this.buttonCancel.TabIndex = 1;
-			this.buttonCancel.Text = "Cancel";
-			this.buttonCancel.UseVisualStyleBackColor = true;
-			this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-			// 
-			// buttonCreateNew
-			// 
-			this.buttonCreateNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonCreateNew.Location = new System.Drawing.Point(227, 232);
-			this.buttonCreateNew.Name = "buttonCreateNew";
-			this.buttonCreateNew.Size = new System.Drawing.Size(102, 23);
-			this.buttonCreateNew.TabIndex = 2;
-			this.buttonCreateNew.Text = "Cerate New...";
-			this.buttonCreateNew.UseVisualStyleBackColor = true;
-			this.buttonCreateNew.Click += new System.EventHandler(this.buttonCreateNew_Click);
-			// 
-			// buttonEdit
-			// 
-			this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonEdit.Location = new System.Drawing.Point(119, 232);
-			this.buttonEdit.Name = "buttonEdit";
-			this.buttonEdit.Size = new System.Drawing.Size(102, 23);
-			this.buttonEdit.TabIndex = 3;
-			this.buttonEdit.Text = "Edit...";
-			this.buttonEdit.UseVisualStyleBackColor = true;
-			this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
-			// 
-			// buttonSelect
-			// 
-			this.buttonSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonSelect.Location = new System.Drawing.Point(11, 232);
-			this.buttonSelect.Name = "buttonSelect";
-			this.buttonSelect.Size = new System.Drawing.Size(102, 23);
-			this.buttonSelect.TabIndex = 4;
-			this.buttonSelect.Text = "Select";
-			this.buttonSelect.UseVisualStyleBackColor = true;
-			this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
-			// 
-			// FormSelectCannedPost
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(423, 262);
-			this.Controls.Add(this.buttonSelect);
-			this.Controls.Add(this.buttonEdit);
-			this.Controls.Add(this.buttonCreateNew);
-			this.Controls.Add(this.buttonCancel);
-			this.Controls.Add(this.listBoxCannedPosts);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-			this.MinimumSize = new System.Drawing.Size(439, 296);
-			this.Name = "FormSelectCannedPost";
-			this.Text = "Select Canned Post";
-			this.ResumeLayout(false);
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonCreateNew = new System.Windows.Forms.Button();
+            this.buttonEdit = new System.Windows.Forms.Button();
+            this.buttonSelect = new System.Windows.Forms.Button();
+            this.treeViewCategories = new System.Windows.Forms.TreeView();
+            this.SuspendLayout();
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCancel.Location = new System.Drawing.Point(502, 373);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(112, 35);
+            this.buttonCancel.TabIndex = 1;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonCreateNew
+            // 
+            this.buttonCreateNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCreateNew.Location = new System.Drawing.Point(340, 373);
+            this.buttonCreateNew.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonCreateNew.Name = "buttonCreateNew";
+            this.buttonCreateNew.Size = new System.Drawing.Size(153, 35);
+            this.buttonCreateNew.TabIndex = 2;
+            this.buttonCreateNew.Text = "Cerate New...";
+            this.buttonCreateNew.UseVisualStyleBackColor = true;
+            this.buttonCreateNew.Click += new System.EventHandler(this.buttonCreateNew_Click);
+            // 
+            // buttonEdit
+            // 
+            this.buttonEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonEdit.Location = new System.Drawing.Point(178, 373);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonEdit.Name = "buttonEdit";
+            this.buttonEdit.Size = new System.Drawing.Size(153, 35);
+            this.buttonEdit.TabIndex = 3;
+            this.buttonEdit.Text = "Edit...";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
+            // 
+            // buttonSelect
+            // 
+            this.buttonSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSelect.Location = new System.Drawing.Point(16, 373);
+            this.buttonSelect.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buttonSelect.Name = "buttonSelect";
+            this.buttonSelect.Size = new System.Drawing.Size(153, 35);
+            this.buttonSelect.TabIndex = 4;
+            this.buttonSelect.Text = "Select";
+            this.buttonSelect.UseVisualStyleBackColor = true;
+            this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
+            // 
+            // treeViewCategories
+            // 
+            this.treeViewCategories.Location = new System.Drawing.Point(20, 20);
+            this.treeViewCategories.Name = "treeViewCategories";
+            this.treeViewCategories.Size = new System.Drawing.Size(594, 315);
+            this.treeViewCategories.TabIndex = 5;
+            // 
+            // FormSelectCannedPost
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(634, 419);
+            this.Controls.Add(this.treeViewCategories);
+            this.Controls.Add(this.buttonSelect);
+            this.Controls.Add(this.buttonEdit);
+            this.Controls.Add(this.buttonCreateNew);
+            this.Controls.Add(this.buttonCancel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(648, 425);
+            this.Name = "FormSelectCannedPost";
+            this.Text = "Select Canned Post";
+            this.ResumeLayout(false);
 
 		}
 
 		#endregion
 
-		private System.Windows.Forms.ListBox listBoxCannedPosts;
 		private System.Windows.Forms.Button buttonCancel;
 		private System.Windows.Forms.Button buttonCreateNew;
 		private System.Windows.Forms.Button buttonEdit;
 		private System.Windows.Forms.Button buttonSelect;
+        private System.Windows.Forms.TreeView treeViewCategories;
 	}
 }

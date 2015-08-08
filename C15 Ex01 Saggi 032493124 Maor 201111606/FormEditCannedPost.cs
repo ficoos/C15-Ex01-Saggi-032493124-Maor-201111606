@@ -60,7 +60,7 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			}
 
 			CannedPost.Name = this.textBoxName.Text;
-			CannedPost.Categories.Clear();
+			CannedPost.Categories.Clear();  //why?
 			foreach (string category in textBoxCategories.Text.Split(','))
 			{
 				CannedPost.Categories.Add(category.Trim());

@@ -41,7 +41,10 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 
 				DynamicTextNode dynamicTextNode = new DynamicTextNode(match.Groups["name"].Value);
 				i_Template.r_TextNodes.Add(dynamicTextNode);
-				i_Template.r_DynamicTextNodes.Add(dynamicTextNode.Name, dynamicTextNode);
+                if (i_Template.r_DynamicTextNodes.ContainsKey(dynamicTextNode.Name) != true) //maor: i changed it casue i got exception already in dictunary
+                {
+                    i_Template.r_DynamicTextNodes.Add(dynamicTextNode.Name, dynamicTextNode);
+                }
 				currentInputIndex = match.Index + match.Length;
 			}
 
@@ -51,6 +54,16 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			}
 		}
 
+        public DynamicTextNode GetDynamicTextNodeValueByKey(string i_Key)   //TO SAGGIE: is it not safe?
+        {
+            DynamicTextNode Result = null;
+            if(r_DynamicTextNodes.ContainsKey(i_Key))
+            {
+                Result = r_DynamicTextNodes[i_Key];
+            }
+            return Result;
+        }
+
 		public IEnumerable<string> Keys
 		{
 			get
@@ -58,6 +71,8 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 				return r_DynamicTextNodes.Keys;
 			}
 		}
+
+
 		
 		public string this[string i_Key]
 		{
@@ -139,5 +154,36 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 		{
 			i_Writer.WriteElementString("StatusTextTemplate", Compile());
 		}
+
+        public static Template DeepCloneWithDummyValuesForDynmicText(Template i_Template)
+        {
+            Template ClonedTemplate = new Template();
+            
+            foreach (ITextNode Node in i_Template.r_TextNodes)
+            {
+                DynamicTextNode CastDynamic = (Node as DynamicTextNode);
+                if (CastDynamic != null)
+                {
+                    if (ClonedTemplate.r_DynamicTextNodes.ContainsKey(CastDynamic.Name) == false)
+                    {
+                        DynamicTextNode newDynamic = new DynamicTextNode(CastDynamic.Name);
+                        newDynamic.Text = "{{" + CastDynamic.Name + "}}";
+                        ClonedTemplate.r_TextNodes.Add(newDynamic);
+                        ClonedTemplate.r_DynamicTextNodes.Add(newDynamic.Name, newDynamic);
+                    }
+                    else
+                    {
+                        ClonedTemplate.r_TextNodes.Add(ClonedTemplate.r_DynamicTextNodes[CastDynamic.Name]);
+                    }
+                }
+                else
+                {
+                    ClonedTemplate.r_TextNodes.Add(Node);
+                }
+                
+            }
+
+            return ClonedTemplate;
+        }
 	}
 }

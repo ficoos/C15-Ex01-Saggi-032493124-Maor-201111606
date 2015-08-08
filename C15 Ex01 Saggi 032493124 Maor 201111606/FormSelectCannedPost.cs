@@ -6,88 +6,152 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml.Serialization;
+
+using FacebookWrapper.ObjectModel;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
-	using System.CodeDom;
-	using System.IO;
-	using System.Xml.Serialization;
+    public partial class FormSelectCannedPost : Form
+    {      
+        public User m_LoggedInUser;
 
-	public partial class FormSelectCannedPost : Form
-	{
-		public CannedPost SelectedPost { get; private set; }
+        public CannedPost SelectedPost { get; private set; }
 
-		public string CannedPostsDirectoryPath { get; set; }
+        public string CannedPostsDirectoryPath { get; set; }
 
-		public FormSelectCannedPost()
-		{
-			InitializeComponent();
-		}
+        public FormSelectCannedPost()
+        {
+            InitializeComponent();
+	        SelectedPost = null;
+        }
 
-		protected override void OnShown(EventArgs e)
-		{
-			refreshPostList();
-			base.OnShown(e);
-		}
+        protected override void OnShown(EventArgs e)
+        {
+            refreshPostList();
+            base.OnShown(e);
+        }
 
-		private void refreshPostList()
-		{
-			listBoxCannedPosts.DataSource = Directory.GetFiles(this.CannedPostsDirectoryPath)
-				.Where(i_FileName => i_FileName.ToLower().EndsWith(".post.xml"))
-				.Select(Path.GetFileName)
-				.ToList();
-		}
+        private void refreshPostList()
+        {
+	        IEnumerable<string> allUserFiles =
+		        Directory.GetFiles(this.CannedPostsDirectoryPath)
+			        .Where(i_FileName => i_FileName.ToLower().EndsWith(".post.xml"))
+			        .Select(Path.GetFileName);
 
-		private void buttonCancel_Click(object i_Sender, EventArgs i_Args)
-		{
-			this.DialogResult = DialogResult.Cancel;
-			this.Close();
-		}
+			Dictionary<string, List<CannedPost>> categoriesAndTemplates = new Dictionary<string, List<CannedPost>>();
+            foreach(string fileName in allUserFiles)
+            {
+                CannedPost post = this.getCannedPostByPostNameInForm(fileName);
 
-		private void buttonSelect_Click(object i_Sender, EventArgs i_Args)
-		{
-			this.SelectedPost = listBoxCannedPosts.SelectedItem as CannedPost;
-			this.DialogResult = DialogResult.OK;
-			this.Close();
-		}
+                if (post != null)
+                {
+                    foreach (string category in post.Categories)
+                    {
+                        if(!categoriesAndTemplates.ContainsKey(category))
+                        {
+                            categoriesAndTemplates.Add(category, new List<CannedPost>());
+                            categoriesAndTemplates[category].Add(post);
+                        }
+                        else
+                        {
+                            categoriesAndTemplates[category].Add(post);
+                        }
+                    }
+                }
+            }
 
-		private void buttonCreateNew_Click(object i_Sender, EventArgs i_Args)
-		{
-			showEditPost(null);
-		}
+			treeViewCategories.Nodes.Clear();
+            foreach(string category in categoriesAndTemplates.Keys)
+            {
+                TreeNode node = new TreeNode(category);
+                foreach (CannedPost post in categoriesAndTemplates[category])
+                {
+                    TreeNode postNode = node.Nodes.Add(post.Name);
+	                postNode.Tag = post;
+                }
 
-		private void buttonEdit_Click(object i_Sender, EventArgs i_Args)
-		{
-			string selectedPostName = listBoxCannedPosts.SelectedItem as string;
-			if (selectedPostName != null)
-			{
-				string selectedPostPath = Path.Combine(CannedPostsDirectoryPath, selectedPostName);
-				XmlSerializer serializer = new XmlSerializer(typeof(CannedPost));
-				CannedPost post;
-				using (TextReader reader = new StreamReader(selectedPostPath))
-				{
-					post = serializer.Deserialize(reader) as CannedPost;
-				}
-				
-				showEditPost(post);
-			}
-		}
+				treeViewCategories.Nodes.Add(node);
+            }
+        }
 
-		private void showEditPost(CannedPost i_Post)
-		{
-			FormEditCannedPost editForm = new FormEditCannedPost();
-			editForm.CannedPost = i_Post;
-			editForm.ShowDialog();
-			if (editForm.DialogResult == DialogResult.OK)
-			{
-				XmlSerializer serializer = new XmlSerializer(typeof(CannedPost));
-				using (TextWriter writer = new StreamWriter(Path.Combine(this.CannedPostsDirectoryPath, editForm.CannedPost.Name + ".post.xml")))
-				{
-					serializer.Serialize(writer, editForm.CannedPost);
-				}
-			}
+        private void buttonCancel_Click(object i_Sender, EventArgs i_Args)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
 
-			refreshPostList();
-		}
-	}
+        private void buttonSelect_Click(object i_Sender, EventArgs i_Args)
+        {
+	        if (treeViewCategories.SelectedNode != null)
+	        {
+		        CannedPost selectedPost = treeViewCategories.SelectedNode.Tag as CannedPost;
+		        if (selectedPost != null)
+		        {
+			        FormPostCannedPost cannedPost = new FormPostCannedPost();
+					cannedPost.CannedPost = selectedPost;
+			        cannedPost.m_LoggedInUser = m_LoggedInUser;
+			        cannedPost.ShowDialog();
+		        }
+
+		        this.DialogResult = DialogResult.OK;
+		        this.Close();
+	        }
+        }
+
+        private void buttonCreateNew_Click(object i_Sender, EventArgs i_Args)
+        {
+            showEditPost(null);
+        }
+
+        private void buttonEdit_Click(object i_Sender, EventArgs i_Args)
+        {
+	        if (this.treeViewCategories.SelectedNode != null)
+	        {
+		        CannedPost post = this.treeViewCategories.SelectedNode.Tag as CannedPost;
+
+		        if (post != null)
+		        {
+			        this.showEditPost(post);
+		        }
+	        }
+        }
+
+        private void showEditPost(CannedPost i_Post)
+        {
+            FormEditCannedPost editForm = new FormEditCannedPost();
+            editForm.CannedPost = i_Post;
+            editForm.ShowDialog();
+            if (editForm.DialogResult == DialogResult.OK)
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(CannedPost));
+                using (TextWriter writer = new StreamWriter(Path.Combine(this.CannedPostsDirectoryPath, editForm.CannedPost.Name + ".post.xml")))
+                {
+                    serializer.Serialize(writer, editForm.CannedPost);
+                }
+            }
+
+            refreshPostList();
+        }
+
+        private CannedPost getCannedPostByPostNameInForm(string i_PostName)
+        {
+            CannedPost post = null;
+            if (i_PostName != null)
+            {
+                string selectedPostPath = Path.Combine(CannedPostsDirectoryPath, i_PostName);
+                XmlSerializer serializer = new XmlSerializer(typeof(CannedPost));
+
+                using (TextReader reader = new StreamReader(selectedPostPath))
+                {
+                    post = serializer.Deserialize(reader) as CannedPost;
+                }
+            }
+
+	        return post;
+        }
+
+        public object PostName { get; set; }
+    }
 }

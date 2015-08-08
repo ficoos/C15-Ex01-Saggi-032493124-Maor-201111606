@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CannedPost xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Girl's night out</Name>
+  <StatusTextTemplate>
+    <StatusTextTemplate>Hey Girl!
+Get that stupid {{EX name}} out of your head and put on your high hills. {{Sorority member}} is on her way to pick you.
+We're going to have the best night everrrrr!!! </StatusTextTemplate>
+  </StatusTextTemplate>
+  <Categories>
+    <string>Events</string>
+  </Categories>
+</CannedPost>

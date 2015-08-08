@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CannedPost xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>New Job</Name>
+  <StatusTextTemplate>
+    <StatusTextTemplate>Hi {{Name}}!
+Congrats on you new job as {{Job Title}}.</StatusTextTemplate>
+  </StatusTextTemplate>
+  <Categories>
+    <string>Greetings</string>
+  </Categories>
+</CannedPost>

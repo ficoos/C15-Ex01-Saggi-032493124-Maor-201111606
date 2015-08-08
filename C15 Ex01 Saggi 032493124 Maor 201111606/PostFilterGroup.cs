@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using System.Xml;
@@ -9,16 +10,8 @@ using FacebookWrapper.ObjectModel;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
-	using System;
-
 	public class PostFilterGroup : IXmlSerializable
     {
-        public string Name { get; set; }
-
-        public ePostPriority PostPriority { get; set; }
-
-        private readonly List<IPostFilter> r_PostFilters;
-
 		private static readonly Dictionary<string, XmlSerializer> sr_Serializers;
 
 		static PostFilterGroup()
@@ -30,6 +23,14 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			}
 		}
 
+        public string Name { get; set; }
+
+		public bool Enabled { get; set; }
+
+        public ePostPriority PostPriority { get; set; }
+
+		private readonly List<IPostFilter> r_PostFilters;
+
 	    public IList<IPostFilter> PostFilters
 	    {
 		    get
@@ -38,7 +39,10 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 		    }
 	    }
 
-	    public bool Enabled { get; set; }
+		public PostFilterGroup()
+			: this(string.Empty)
+		{
+		}
 
         public override string ToString()
         {
@@ -49,10 +53,6 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
         {
 	        return r_PostFilters.Any(i_PostFilter => i_PostFilter.IsMatch(i_Post));
         }
-
-	    public PostFilterGroup() : this(string.Empty)
-	    {
-	    }
 
 	    public PostFilterGroup(string i_Name, ePostPriority i_PostPriority = ePostPriority.Hidden)
         {
@@ -93,7 +93,6 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 			PostPriority = postPriority;
 			i_Reader.ReadStartElement();
 			i_Reader.ReadStartElement("PostFilters");
-			
 			while (i_Reader.IsStartElement())
 			{
 				XmlSerializer serializer = sr_Serializers[i_Reader.Name];

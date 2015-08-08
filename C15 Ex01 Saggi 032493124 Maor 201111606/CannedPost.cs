@@ -6,9 +6,9 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 	{
 		public string Name { get; set; }
 
-		private readonly List<string> r_Categories = new List<string>();
-
 		public Template StatusTextTemplate { get; set; }
+
+		private readonly List<string> r_Categories = new List<string>();
 
 		public List<string> Categories
 		{

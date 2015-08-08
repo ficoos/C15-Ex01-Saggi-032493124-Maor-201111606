@@ -2,7 +2,6 @@
 {
     partial class AddNewGroupForm
     {
-        public PostFilterGroup NewFilterGroup;
         /// <summary>
         /// Required designer variable.
         /// </summary>

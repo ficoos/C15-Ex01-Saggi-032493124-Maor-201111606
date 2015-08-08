@@ -5,15 +5,21 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
     public partial class AddNewGroupForm : Form
     {
+		public PostFilterGroup NewFilterGroup { get; private set; }
+
         public AddNewGroupForm()
         {
             InitializeComponent();
         }
 
+	    private bool isFormValid()
+	    {
+			return !string.IsNullOrEmpty(textBoxGroupName.Text) && comboBoxPriority.SelectedItem != null;
+	    }
+
         private void buttonAdd_Click(object i_Sender, EventArgs i_Args)
         {
-            bool isValidInput = !string.IsNullOrEmpty(textBoxGroupName.Text) && comboBoxPriority.SelectedItem != null;
-            if (isValidInput)
+            if (isFormValid())
             {
                 NewFilterGroup = new PostFilterGroup(textBoxGroupName.Text, (ePostPriority)comboBoxPriority.SelectedItem);
                 DialogResult = DialogResult.OK;

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CannedPost xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Invite To Party</Name>
+  <StatusTextTemplate>
+    <StatusTextTemplate>Hi Everyone!
+Come and have fun at the {{Club name}}!
+For every beer you buy, you get a free {{Booze type}} shot for free!!!!
+Doors open at {{Hour}}.
+Tthe legendary {{DJ Name}} will keep you moving on the dancefloor !!</StatusTextTemplate>
+  </StatusTextTemplate>
+  <Categories>
+    <string>Events</string>
+  </Categories>
+</CannedPost>

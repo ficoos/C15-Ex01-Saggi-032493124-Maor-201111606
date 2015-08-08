@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CannedPost xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Birthday wish</Name>
+  <StatusTextTemplate>
+    <StatusTextTemplate>Hi  {{Name}}!!
+I wish you all the best on your {{year}} birthday!
+May your birthday and every day be filled with the warmth of sunshine, the happiness of smiles, the sounds of laughter, the feeling of love and the sharing of good cheer.
+{{Name}}, you are a true friend!</StatusTextTemplate>
+  </StatusTextTemplate>
+  <Categories>
+    <string>Greetings</string>
+  </Categories>
+</CannedPost>

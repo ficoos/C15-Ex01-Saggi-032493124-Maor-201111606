@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
-	using System.Collections.Generic;
-
 	public partial class FormPostCannedPost : Form
     {
 		private readonly Dictionary<string, string> r_DynamicParts = new Dictionary<string, string>();

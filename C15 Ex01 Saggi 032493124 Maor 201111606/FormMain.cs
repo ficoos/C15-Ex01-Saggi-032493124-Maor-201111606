@@ -9,10 +9,10 @@ using FacebookWrapper.ObjectModel;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
+	using System.Linq;
+
 	public partial class FormMain : Form
 	{
-        public List<PostFilterGroup> m_PostFilterGroups;
-
 		private const string k_ApplicationId = "1444340485893858";
 
 		private static readonly string[] sr_RequiredPermissions = 
@@ -36,6 +36,21 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 		{
 			return Properties.Settings.Default.LastKnownAccessToken;
 		}
+
+		private static void copyFileTree(string i_SourceDirectory, string i_TargetDirectory)
+		{
+			foreach (string dirPath in Directory.GetDirectories(i_SourceDirectory, "*", SearchOption.AllDirectories))
+			{
+				Directory.CreateDirectory(dirPath.Replace(i_SourceDirectory, i_TargetDirectory));
+			}
+
+			foreach (string newPath in Directory.GetFiles(i_SourceDirectory, "*.*", SearchOption.AllDirectories))
+			{
+				File.Copy(newPath, newPath.Replace(i_SourceDirectory, i_TargetDirectory), true);
+			}
+		}
+
+		private List<PostFilterGroup> m_PostFilterGroups;
 
 		private User m_LoggedInUser;
 
@@ -70,6 +85,16 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 				m_LoggedInUser = result.LoggedInUser;
 				m_UserPaths = new UserPaths(m_LoggedInUser);
 				saveAccessToken(result.AccessToken);
+			}
+
+			initializeUserDirectory();
+		}
+
+		private void initializeUserDirectory()
+		{
+			if (!File.Exists(m_UserPaths.PostFiltersPath))
+			{
+				copyFileTree(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DefaultContent"), m_UserPaths.UserSettingsPath);
 			}
 		}
 
@@ -136,55 +161,32 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
                 }
                 else
                 {
-                    FacebookObjectCollection<Post> promotedPostCollection = new FacebookObjectCollection<Post>();
-                    FacebookObjectCollection<Post> demotedPostCollection = new FacebookObjectCollection<Post>();
-                    FacebookObjectCollection<Post> nonePriorityPostCollection = new FacebookObjectCollection<Post>();
-                    foreach (Post post in m_LoggedInUser.NewsFeed)
-                    {
-						ePostPriority postPriority = ePostPriority.None;
-                        foreach (PostFilterGroup filterGroup in this.m_PostFilterGroups)
-                        {
-                            if (filterGroup.IsMatch(post))
-                            {
-								postPriority = (ePostPriority)Math.Min((int)filterGroup.PostPriority, (int)postPriority);
-                            }
-                        }
-
-	                    switch (postPriority)
-	                    {
-		                    case ePostPriority.Demoted:
-			                    demotedPostCollection.Add(post);
-			                    break;
-		                    case ePostPriority.Promoted:
-			                    promotedPostCollection.Add(post);
-			                    break;
-		                    case ePostPriority.None:
-			                    nonePriorityPostCollection.Add(post);
-			                    break;
-	                    }
-                    }
-
-                    FacebookObjectCollection<Post> result = new FacebookObjectCollection<Post>();
-                    foreach (Post post in promotedPostCollection)
-                    {
-                        result.Add(post);
-                    }
-
-                    foreach (Post post in nonePriorityPostCollection)
-                    {
-                        result.Add(post);
-                    }
-
-                    foreach (Post post in demotedPostCollection)
-                    {
-                        result.Add(post);
-                    }
-
-	                listBoxNewsFeed.DataSource = result;
+					List<Post> posts = m_LoggedInUser.NewsFeed.Where(i_Post => getPostPriority(i_Post) != ePostPriority.Hidden).ToList();
+					posts.Sort((i_Post, i_OtherPost) => getPostPriority(i_OtherPost).CompareTo(getPostPriority(i_Post)));                  
+	                listBoxNewsFeed.DataSource = posts;
                 }
             }
         }
-		
+
+		private ePostPriority getPostPriority(Post i_Post)
+		{
+			ePostPriority postPriority = ePostPriority.None;
+			foreach (PostFilterGroup filterGroup in this.m_PostFilterGroups)
+			{
+				if (filterGroup.IsMatch(i_Post))
+				{
+					postPriority = (ePostPriority)Math.Min((int)filterGroup.PostPriority, (int)postPriority);
+				}
+
+				if (postPriority == ePostPriority.Hidden)
+				{
+					break;
+				}
+			}
+
+			return postPriority;
+		}
+
 		private void listBoxEvents_SelectedIndexChanged(object i_Sender, EventArgs i_Args)
 		{
 			if (listBoxEvents.SelectedItems.Count == 1)
@@ -262,13 +264,19 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 
 		private void buttonCannedPost_Click(object i_Sender, EventArgs i_Args)
 		{
-			FormSelectCannedPost form = new FormSelectCannedPost();
-			form.CannedPostsDirectoryPath = m_UserPaths.CannedPostsDirectory;
+			FormSelectCannedPost form = new FormSelectCannedPost
+			{
+				CannedPostsDirectoryPath = this.m_UserPaths.CannedPostsDirectory
+			};
+
 			form.ShowDialog();
 			if (form.DialogResult == DialogResult.OK)
 			{
-				FormPostCannedPost cannedPost = new FormPostCannedPost();
-				cannedPost.CannedPost = form.SelectedPost;
+				FormPostCannedPost cannedPost = new FormPostCannedPost
+				{
+					CannedPost = form.SelectedPost
+				};
+
 				cannedPost.ShowDialog();
 				if (cannedPost.DialogResult == DialogResult.OK)
 				{

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfPostFilterGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <PostFilterGroup Name="Games Of Throens spoilers" PostPriority="Hidden">
+    <PostFilters>
+      <RegexPostFilter Regex="Stark" Enabled="True" />
+      <RegexPostFilter Regex="Game of thrones" Enabled="True" />
+      <RegexPostFilter Regex="Winter is comming" Enabled="True" />
+      <RegexPostFilter Regex="Arya" Enabled="True" />
+    </PostFilters>
+  </PostFilterGroup>
+  <PostFilterGroup Name="Not safe for kids" PostPriority="Hidden">
+    <PostFilters>
+      <RegexPostFilter Regex="Sex" Enabled="True" />
+      <RegexPostFilter Regex="Porn" Enabled="True" />
+      <RegexPostFilter Regex="Marijuana" Enabled="True" />
+      <RegexPostFilter Regex="Miley Cyrus" Enabled="True" />
+    </PostFilters>
+  </PostFilterGroup>
+  <PostFilterGroup Name="Politics" PostPriority="Promoted">
+    <PostFilters>
+      <RegexPostFilter Regex="Obama" Enabled="True" />
+      <RegexPostFilter Regex="ביבי נתניהו" Enabled="True" />
+      <RegexPostFilter Regex="מר&quot;צ" Enabled="True" />
+      <RegexPostFilter Regex="הבית היהודי" Enabled="True" />
+    </PostFilters>
+  </PostFilterGroup>
+  <PostFilterGroup Name="Not intersting stuff" PostPriority="Demoted">
+    <PostFilters>
+      <RegexPostFilter Regex="Buzzfeed" Enabled="True" />
+      <RegexPostFilter Regex="Vegan" Enabled="True" />
+      <RegexPostFilter Regex="Paleo Diet" Enabled="True" />
+    </PostFilters>
+  </PostFilterGroup>
+</ArrayOfPostFilterGroup>

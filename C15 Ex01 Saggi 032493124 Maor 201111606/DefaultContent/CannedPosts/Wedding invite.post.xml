@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CannedPost xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Wedding invite</Name>
+  <StatusTextTemplate>
+    <StatusTextTemplate>Hi Everyone!
+We are pleased to invite you to come and celebrate our special day.
+The ceremony will be at the {{Location}} at {{Time}}.
+
+With Love,
+{{BridesName}} and {{GroomsName}}</StatusTextTemplate>
+  </StatusTextTemplate>
+  <Categories>
+    <string>Events</string>
+  </Categories>
+</CannedPost>

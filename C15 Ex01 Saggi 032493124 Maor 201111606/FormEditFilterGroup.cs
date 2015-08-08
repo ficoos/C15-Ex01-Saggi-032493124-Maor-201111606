@@ -10,9 +10,10 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
         public FormEditFilterGroup()
         {
             InitializeComponent();
+	        loadFilterGroup();
         }
 
-        public void LoadFilterGroup()
+        private void loadFilterGroup()
         {
             this.comboBoxPriority.Items.Add(ePostPriority.Demoted);
             this.comboBoxPriority.Items.Add(ePostPriority.Hidden);

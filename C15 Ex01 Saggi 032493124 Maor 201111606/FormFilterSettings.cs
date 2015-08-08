@@ -23,12 +23,12 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 
         private void buttonAddGroup_Click(object i_Sender, EventArgs i_Args)
         {
-            AddNewGroupForm addGroupForm = new AddNewGroupForm();
-            addGroupForm.ShowDialog();
-            if (addGroupForm.DialogResult == DialogResult.OK)
+            FormAddNewGroup formAddGroup = new FormAddNewGroup();
+            formAddGroup.ShowDialog();
+            if (formAddGroup.DialogResult == DialogResult.OK)
             {
-                checkedListBoxFilterGroups.Items.Add(addGroupForm.NewFilterGroup, addGroupForm.NewFilterGroup.Enabled);
-                PostFilterGroup.Add(addGroupForm.NewFilterGroup);
+                checkedListBoxFilterGroups.Items.Add(formAddGroup.NewFilterGroup, formAddGroup.NewFilterGroup.Enabled);
+                PostFilterGroup.Add(formAddGroup.NewFilterGroup);
             }
         }
         
@@ -51,7 +51,6 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
                 PostFilterGroup postFilterGroup = (PostFilterGroup)checkedListBoxFilterGroups.SelectedItem;
                 FormEditFilterGroup editFilterGroupForm = new FormEditFilterGroup();
                 editFilterGroupForm.FilterGroup = postFilterGroup;
-                editFilterGroupForm.LoadFilterGroup();
                 editFilterGroupForm.ShowDialog();
             }
         }

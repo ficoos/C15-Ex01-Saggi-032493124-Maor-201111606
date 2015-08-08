@@ -1,5 +1,7 @@
 @startuml
 
+skinparam classAttributeIconSize 0
+
 title Facebook App -  Class Diagram
 
 interface IXmlSerializable {
@@ -17,11 +19,11 @@ class UserPaths {
     +CannedPostsDirectory: string {getter}
 }
 
-FormMain "1" *-right- "1" UserPaths: Gets the paths for all\nthe persisted information\nfor the logged in user
-FormMain "1" *-left- "1" User: Holds the currently\nlogged in user
-FormMain "1" *-left- "*" Post
-FormMain "1" *-left- "*" Event
-FormMain "1" *-left- "*" Checkin
+FormMain "1" o-up- "1" UserPaths: Gets the paths for all\nthe persisted information\nfor the logged in user
+FormMain "1" o-up- "1" User: Holds the currently\nlogged in user
+FormMain "1" o-up- "*" Post
+FormMain "1" o-up- "*" Event
+FormMain "1" o-up- "*" Checkin
 
 package "Post Filtering Feature" <<Frame>> {
 
@@ -34,22 +36,22 @@ package "Post Filtering Feature" <<Frame>> {
     }
 
     class FormFilterSettings extends Form {
-        PostFilterGroups : List<PostFilterGroup>
+        +PostFilterGroups : List<PostFilterGroup>
     }
 
-    FormFilterSettings "1" *-down- "*" PostFilterGroup
-    FormMain -down- FormFilterSettings: Shown when [Filter Settings...]\nis clicked
+    FormFilterSettings "1" *- "*" PostFilterGroup
+    FormMain *- FormFilterSettings: Shown when [Filter Settings...]\nis clicked
     
-    class AddNewGroupForm extends Form {
-        NewFilterGroup: PostFilterGroup
+    class FormAddNewGroup extends Form {
+        +NewFilterGroup: PostFilterGroup
     }
     
     class FormEditFilterGroup extends Form {
-        FilterGroup: PostFilterGroup
+        +FilterGroup: PostFilterGroup
     }
     
-    FormFilterSettings -down- AddNewGroupForm: Shown when creating a new filter group
-    FormFilterSettings -down- FormEditFilterGroup: shown when editing a filter group
+    FormFilterSettings - FormAddNewGroup: Shown when creating\na new filter group
+    FormFilterSettings - FormEditFilterGroup: shown when editing\na filter group
 
     enum ePostPriority {
         Hidden
@@ -57,9 +59,9 @@ package "Post Filtering Feature" <<Frame>> {
         Promoted
     }
 
-    interface IPostFilter {
-        Enabled: bool
-        IsMatch(Post): bool
+    interface IPostFilter extends IXmlSerializable {
+        +Enabled: bool
+        +IsMatch(Post): bool
     }
 
 
@@ -67,40 +69,72 @@ package "Post Filtering Feature" <<Frame>> {
         +Expression: Regex
     }
 
-    PostFilterGroup -right- ePostPriority: priority to set the post when matched
-    PostFilterGroup "1" *-down- "*" IPostFilter: filters to use to determain if post applies to group
-    FormMain "1" *-down- "*" PostFilterGroup: All the groups that will be used for filtering
+    PostFilterGroup - ePostPriority: priority to set the\npost when matched
+    PostFilterGroup "1" *-- "*" IPostFilter: filters to use to\ndetermain if post applies\nto group
+    FormMain "1" o- "*" PostFilterGroup: All the groups\nthat will be used\nfor filtering
 
 }
 
 package "Canned Post Feature" <<Frame>> {
 
+    class FormSelectCannedPost extends Form {
+        +SelectedPost: CannedPost
+        +CannedPostsDirectoryPath: string
+    }
+    
+    FormMain *- FormSelectCannedPost: Shown when [Canned Post...]\nis clicked
+    
+    class FormEditCannedPost extends Form {
+        +CannedPost: CannedPost
+    }
+    
+    class FormPostCannedPost extends Form {
+        +CannedPost: CannedPost
+        +CompiledPost: PostInfo
+    }
+
+    FormSelectCannedPost - FormEditCannedPost : Shown when a canned post\nis edited or created
+    FormSelectCannedPost - FormPostCannedPost : Shown after a canned post\nis selected
+    FormSelectCannedPost o- CannedPost
+    FormEditCannedPost o- CannedPost
+    FormPostCannedPost o- CannedPost
+
     class PostInfo {
-        StatusText: string
+        +StatusText: string
     }
-
-    class PostTemplate implements IXmlSerializable {
+    
+    class CannedPost {
         +Name: string
-        +DynamicSections: IDictionary<string, DynamicTextSection>
-        -Sections: IEnumerable<ITemplateSection>
-        +Compile(): PostInfo
+        +StatusTextTemplate: Template
+        +Categories: List<string>
+        +GeneratePost(IEnumerable<KeyValuePair<string, string>> i_StatusTemplateReplacementPairs): PostInfo
     }
 
-    interface ITemplateSection {
-        +Value: string {getter}
+    class Template implements IXmlSerializable {
+        {static} +Parse(string i_Input) Template
+        +Name: string
+        +Keys: IEnumerable<string>
+        +Compile(IEnumerable<KeyValuePair<string, string>> i_ReplacementPairs): string
     }
 
-    class StaticTextSection implements ITemplateSection {
-        +Value: string {getter}
-        +constructor(string i_Value)
+    interface ITextNode {
+        +Text: string {getter}
     }
 
-    class DynamicTextSection implements ITemplateSection {
-        +Value: string {getter, setter}
+    class StaticTextNode implements ITextNode {
+        +Text: string {getter}
+        +constructor(string i_Text)
     }
 
-    PostTemplate -down- PostInfo: Compiles to
-    PostTemplate "1" *-down- "*" ITemplateSection: status text is composed of
+    class DynamicTextNode implements ITextNode {
+        +Name: string {getter}
+        +Text: string {getter, setter}
+        +constructor(string i_Name, string i_Text)
+    }
+
+    Template "1" *-- "*" ITextNode: Template is composed of
+    CannedPost "1" *-- "1" Template
+    CannedPost - PostInfo : Compiles to
 }
 
 @enduml

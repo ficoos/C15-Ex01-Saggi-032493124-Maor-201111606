@@ -1,6 +1,6 @@
 ﻿namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
-    partial class AddNewGroupForm
+    partial class FormAddNewGroup
     {
         /// <summary>
         /// Required designer variable.
@@ -101,7 +101,7 @@
 			this.buttonCancel.UseVisualStyleBackColor = true;
 			this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
 			// 
-			// AddNewGroupForm
+			// FormAddNewGroup
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -114,7 +114,7 @@
 			this.Controls.Add(this.textBoxGroupName);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.Margin = new System.Windows.Forms.Padding(2);
-			this.Name = "AddNewGroupForm";
+			this.Name = "FormAddNewGroup";
 			this.Text = "Add New Group";
 			this.ResumeLayout(false);
 			this.PerformLayout();

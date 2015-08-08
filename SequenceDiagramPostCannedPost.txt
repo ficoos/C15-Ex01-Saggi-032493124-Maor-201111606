@@ -1,0 +1,45 @@
+@startuml
+
+title "Facebook App - Post Canned Post - Sequence Diagram"
+
+actor User
+boundary FormMain
+
+User -> FormMain: buttonCannedPost_Click()
+activate User
+activate FormMain
+create boundary FormSelectCannedPost
+FormMain -> FormSelectCannedPost
+FormMain -> FormSelectCannedPost: set CannedPostsDirectoryPath
+activate FormSelectCannedPost
+FormMain -> FormSelectCannedPost: ShowDialog()
+User -> FormSelectCannedPost:buttonSelect_Click()
+FormSelectCannedPost -> FormSelectCannedPost: set SelectedPost
+FormSelectCannedPost -> FormSelectCannedPost: Close()
+FormMain -> FormSelectCannedPost: get SelectedPost
+destroy FormSelectCannedPost
+create boundary FormPostCannedPost
+FormMain -> FormPostCannedPost
+FormMain -> FormPostCannedPost: set SelectedPost
+create Template
+FormPostCannedPost -> Template
+activate FormPostCannedPost
+FormMain -> FormPostCannedPost: ShowDialog()
+activate Template
+
+loop while Filling Up Form 
+
+    FormPostCannedPost -> Template: Compile()
+
+end
+
+FormPostCannedPost -> FormPostCannedPost: set CompiledPost
+destroy Template
+FormMain -> LoggedInUser: PostStauts()
+activate LoggedInUser
+deactivate LoggedInUser
+destroy FormPostCannedPost
+deactivate FormMain
+deactivate User
+
+@enduml

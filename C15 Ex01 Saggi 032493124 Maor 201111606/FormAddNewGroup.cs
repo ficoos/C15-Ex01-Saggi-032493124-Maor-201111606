@@ -3,11 +3,11 @@ using System.Windows.Forms;
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
-    public partial class AddNewGroupForm : Form
+    public partial class FormAddNewGroup : Form
     {
 		public PostFilterGroup NewFilterGroup { get; private set; }
 
-        public AddNewGroupForm()
+        public FormAddNewGroup()
         {
             InitializeComponent();
         }

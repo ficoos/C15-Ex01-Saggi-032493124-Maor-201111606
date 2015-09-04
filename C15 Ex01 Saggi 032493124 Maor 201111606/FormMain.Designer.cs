@@ -63,7 +63,7 @@
 			// 
 			this.buttonSetStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSetStatus.Enabled = false;
-			this.buttonSetStatus.Location = new System.Drawing.Point(798, 12);
+			this.buttonSetStatus.Location = new System.Drawing.Point(737, 12);
 			this.buttonSetStatus.Name = "buttonSetStatus";
 			this.buttonSetStatus.Size = new System.Drawing.Size(75, 23);
 			this.buttonSetStatus.TabIndex = 49;
@@ -78,7 +78,7 @@
 			this.textBoxStatus.Enabled = false;
 			this.textBoxStatus.Location = new System.Drawing.Point(163, 14);
 			this.textBoxStatus.Name = "textBoxStatus";
-			this.textBoxStatus.Size = new System.Drawing.Size(629, 20);
+			this.textBoxStatus.Size = new System.Drawing.Size(568, 20);
 			this.textBoxStatus.TabIndex = 48;
 			// 
 			// label3
@@ -110,7 +110,7 @@
 			this.listBoxNewsFeed.ItemHeight = 19;
 			this.listBoxNewsFeed.Location = new System.Drawing.Point(219, 70);
 			this.listBoxNewsFeed.Name = "listBoxNewsFeed";
-			this.listBoxNewsFeed.Size = new System.Drawing.Size(794, 118);
+			this.listBoxNewsFeed.Size = new System.Drawing.Size(733, 118);
 			this.listBoxNewsFeed.TabIndex = 51;
 			// 
 			// buttonFetchNewsFeed
@@ -120,7 +120,7 @@
 			this.buttonFetchNewsFeed.Enabled = false;
 			this.buttonFetchNewsFeed.Location = new System.Drawing.Point(219, 41);
 			this.buttonFetchNewsFeed.Name = "buttonFetchNewsFeed";
-			this.buttonFetchNewsFeed.Size = new System.Drawing.Size(607, 23);
+			this.buttonFetchNewsFeed.Size = new System.Drawing.Size(546, 23);
 			this.buttonFetchNewsFeed.TabIndex = 52;
 			this.buttonFetchNewsFeed.Text = "Fetch News Feed";
 			this.buttonFetchNewsFeed.UseVisualStyleBackColor = true;
@@ -130,9 +130,9 @@
 			// 
 			this.pictureBoxEvent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.pictureBoxEvent.Location = new System.Drawing.Point(855, 242);
+			this.pictureBoxEvent.Location = new System.Drawing.Point(794, 242);
 			this.pictureBoxEvent.Name = "pictureBoxEvent";
-			this.pictureBoxEvent.Size = new System.Drawing.Size(160, 173);
+			this.pictureBoxEvent.Size = new System.Drawing.Size(160, 209);
 			this.pictureBoxEvent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 			this.pictureBoxEvent.TabIndex = 55;
 			this.pictureBoxEvent.TabStop = false;
@@ -146,7 +146,7 @@
 			this.listBoxCheckins.FormattingEnabled = true;
 			this.listBoxCheckins.Location = new System.Drawing.Point(12, 242);
 			this.listBoxCheckins.Name = "listBoxCheckins";
-			this.listBoxCheckins.Size = new System.Drawing.Size(200, 173);
+			this.listBoxCheckins.Size = new System.Drawing.Size(200, 199);
 			this.listBoxCheckins.TabIndex = 53;
 			// 
 			// listBoxEvents
@@ -159,7 +159,7 @@
 			this.listBoxEvents.FormattingEnabled = true;
 			this.listBoxEvents.Location = new System.Drawing.Point(220, 242);
 			this.listBoxEvents.Name = "listBoxEvents";
-			this.listBoxEvents.Size = new System.Drawing.Size(629, 173);
+			this.listBoxEvents.Size = new System.Drawing.Size(568, 199);
 			this.listBoxEvents.TabIndex = 54;
 			this.listBoxEvents.SelectedIndexChanged += new System.EventHandler(this.listBoxEvents_SelectedIndexChanged);
 			// 
@@ -170,7 +170,7 @@
 			this.buttonFetchEvents.Enabled = false;
 			this.buttonFetchEvents.Location = new System.Drawing.Point(220, 213);
 			this.buttonFetchEvents.Name = "buttonFetchEvents";
-			this.buttonFetchEvents.Size = new System.Drawing.Size(793, 23);
+			this.buttonFetchEvents.Size = new System.Drawing.Size(732, 23);
 			this.buttonFetchEvents.TabIndex = 56;
 			this.buttonFetchEvents.Text = "Fetch News Events";
 			this.buttonFetchEvents.UseVisualStyleBackColor = true;
@@ -191,7 +191,7 @@
 			// 
 			this.buttonFilterSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonFilterSettings.Enabled = false;
-			this.buttonFilterSettings.Location = new System.Drawing.Point(923, 41);
+			this.buttonFilterSettings.Location = new System.Drawing.Point(862, 41);
 			this.buttonFilterSettings.Margin = new System.Windows.Forms.Padding(2);
 			this.buttonFilterSettings.Name = "buttonFilterSettings";
 			this.buttonFilterSettings.Size = new System.Drawing.Size(88, 24);
@@ -207,7 +207,7 @@
 			this.checkBoxShowFiltered.Checked = true;
 			this.checkBoxShowFiltered.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBoxShowFiltered.Enabled = false;
-			this.checkBoxShowFiltered.Location = new System.Drawing.Point(831, 45);
+			this.checkBoxShowFiltered.Location = new System.Drawing.Point(770, 45);
 			this.checkBoxShowFiltered.Margin = new System.Windows.Forms.Padding(2);
 			this.checkBoxShowFiltered.Name = "checkBoxShowFiltered";
 			this.checkBoxShowFiltered.Size = new System.Drawing.Size(90, 17);
@@ -220,7 +220,7 @@
 			// 
 			this.buttonCannedPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonCannedPost.Enabled = false;
-			this.buttonCannedPost.Location = new System.Drawing.Point(879, 12);
+			this.buttonCannedPost.Location = new System.Drawing.Point(818, 12);
 			this.buttonCannedPost.Name = "buttonCannedPost";
 			this.buttonCannedPost.Size = new System.Drawing.Size(132, 23);
 			this.buttonCannedPost.TabIndex = 60;
@@ -232,7 +232,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1024, 420);
+			this.ClientSize = new System.Drawing.Size(963, 456);
 			this.Controls.Add(this.buttonCannedPost);
 			this.Controls.Add(this.checkBoxShowFiltered);
 			this.Controls.Add(this.buttonFilterSettings);

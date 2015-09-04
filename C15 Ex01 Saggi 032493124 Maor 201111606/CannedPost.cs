@@ -2,6 +2,7 @@
 
 namespace C15_Ex01_Saggi_032493124_Maor_201111606
 {
+	// This is a change
 	public class CannedPost
 	{
 		public string Name { get; set; }

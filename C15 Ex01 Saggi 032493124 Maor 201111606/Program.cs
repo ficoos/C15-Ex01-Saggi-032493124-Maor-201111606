@@ -11,7 +11,9 @@ namespace C15_Ex01_Saggi_032493124_Maor_201111606
 		[STAThread]
 		public static void Main()
 		{
+			// Some Change
 			Application.EnableVisualStyles();
+			// Some Change
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new FormMain());
 		}
